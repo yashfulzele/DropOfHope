@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">DropOfHope</string>
+    <string name="new_here_sign_up"><u>new here? sign up</u></string>
+    <string name="choose_your_photo"><u>Choose your photo</u></string>
+    <string name="map_api_key">AIzaSyAOreoo9Shi0hc1vO5oSAu4srQ90QW3VqI</string>
+    <array name="blood_group">
+        <item>Select your blood group</item>
+        <item>A+</item>
+        <item>A-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+        <item>B+</item>
+        <item>B-</item>
+    </array>
+    <array name="yes_no">
+        <item>Do you want to be a donor?</item>
+        <item>Yes</item>
+        <item>No</item>
+    </array>
+    <array name="choose_org">
+        <item>Which organization are you?</item>
+        <item>Hospital</item>
+        <item>Blood Donation Camp</item>
+        <item>Any other</item>
+    </array>
+</resources>

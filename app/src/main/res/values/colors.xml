@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#000000</color>
+    <color name="choose_your_location">#48494A</color>
+    <color name="main_background">#767779</color>
+    <color name="hint">#A9A5A4</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+</resources>
