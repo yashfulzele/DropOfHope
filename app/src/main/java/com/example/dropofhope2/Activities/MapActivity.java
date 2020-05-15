@@ -48,6 +48,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final int PERMISSION_REQUEST_CODE = 9001;
     private static final float DEFAULT_ZOOM = 17f;
     private boolean mLocationPermissionGranted = false;
+
     private String userAddress;
 
     private GoogleMap mMap;
