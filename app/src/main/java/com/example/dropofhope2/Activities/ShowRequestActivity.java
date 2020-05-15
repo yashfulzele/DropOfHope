@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -100,6 +99,7 @@ public class ShowRequestActivity extends AppCompatActivity implements showReques
         intent.putExtra("Id", selectedKey);
         intent.putExtra("Image uri", selectedItem.get("Image uri"));
         intent.putExtra("Name", selectedItem.get("Name"));
+        intent.putExtra("Type", selectedItem.get("Type"));
         intent.putExtra("Message", selectedItem.get("Message"));
         startActivity(intent);
     }

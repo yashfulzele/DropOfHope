@@ -1,6 +1,5 @@
 package com.example.dropofhope2.Activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;

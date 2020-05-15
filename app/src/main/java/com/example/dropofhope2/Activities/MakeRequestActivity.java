@@ -1,6 +1,5 @@
 package com.example.dropofhope2.Activities;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,16 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dropofhope2.R;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -58,24 +54,16 @@ public class MakeRequestActivity extends AppCompatActivity {
         db_ref = FirebaseDatabase.getInstance().getReference("Requests");
         initViews();
         progressBar.setVisibility(View.GONE);
-        chooseImageTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseImage();
+        chooseImageTv.setOnClickListener(v -> chooseImage());
+        submitRequestBt.setOnClickListener(v -> {
+            String message = messageEt.getText().toString();
+            if (uploadTask != null && uploadTask.isInProgress()) {
+                showMessage("Upload in progress...");
+            } else {
+                FileUploader(message);
             }
-        });
-        submitRequestBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String message = messageEt.getText().toString();
-                if (uploadTask != null && uploadTask.isInProgress()) {
-                    showMessage("Upload in progress...");
-                } else {
-                    FileUploader(message);
-                }
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                MakeRequestActivity.this.finish();
-            }
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            MakeRequestActivity.this.finish();
         });
     }
 
@@ -87,34 +75,22 @@ public class MakeRequestActivity extends AppCompatActivity {
             String uid = Objects.requireNonNull(user).getUid();
             String type = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Type", "Person");
             String name = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Name", "DEFAULT");
-//            Map<String, String> map = new HashMap<>();
-//            map.put("Message", message);
-//            map.put("Email", user.getEmail());
-//            map.put("Image Id", imageId);
-//            map.put("Type", type);
-//            map.put("Name", name);
-//            map.put("Image uri", imageUri.toString());
-//            map.put("Id", uid);
-//            db_ref.child(uid).setValue(map);
             StorageReference mRef = mStorageRef.child(imageId);
             uploadTask = mRef.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> {
                         progressBar.setProgress(0);
                         showMessage("Request sent successfully!");
-                        mRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                String url = uri.toString();
-                                Map<String, String> map = new HashMap<>();
-                                map.put("Message", message);
-                                map.put("Email", user.getEmail());
-                                map.put("Image Id", imageId);
-                                map.put("Type", type);
-                                map.put("Name", name);
-                                map.put("Image uri", url);
-                                map.put("Id", uid);
-                                db_ref.child(uid).setValue(map);
-                            }
+                        mRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                            String url = uri.toString();
+                            Map<String, String> map = new HashMap<>();
+                            map.put("Message", message);
+                            map.put("Email", user.getEmail());
+                            map.put("Image Id", imageId);
+                            map.put("Type", type);
+                            map.put("Name", name);
+                            map.put("Image uri", url);
+                            map.put("Id", uid);
+                            db_ref.child(uid).setValue(map);
                         });
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         MakeRequestActivity.this.finish();
