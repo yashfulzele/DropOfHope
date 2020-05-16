@@ -3,4 +3,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
+
+    <style name="MyPopupStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColorPrimary">#E5E5E5</item>
+        <item name="android:background">#505050</item>
+    </style>
 </resources>
