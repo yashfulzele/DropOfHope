@@ -159,7 +159,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private void MoveCamera(LatLng latLng, float zoom, String title) {
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
         MarkerOptions options = new MarkerOptions()
                 .position(latLng)
                 .title(title);
