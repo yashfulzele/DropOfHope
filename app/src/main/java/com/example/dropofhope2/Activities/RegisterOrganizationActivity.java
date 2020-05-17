@@ -2,7 +2,9 @@ package com.example.dropofhope2.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Patterns;
@@ -29,6 +31,8 @@ public class RegisterOrganizationActivity extends AppCompatActivity {
     private Spinner orgChooseSp;
     private Button orgRegister;
     private ProgressBar progressBar;
+    private SharedPreferences sharedPreferences;
+    private static final String MyPREFERENCES = "MyPrefs";
     private FirebaseAuth mAuth;
 
     @Override
@@ -38,6 +42,7 @@ public class RegisterOrganizationActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("Users/Organization");
         mAuth = FirebaseAuth.getInstance();
+        sharedPreferences = getApplicationContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         initViews();
         hideProgressBar();
         orgRegister.setOnClickListener(v -> {
@@ -55,8 +60,10 @@ public class RegisterOrganizationActivity extends AppCompatActivity {
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 String uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Type", "Organization").apply();
-                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Name", orgName).apply();
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("Type", "Organization");
+                                editor.putString("Name", orgName);
+                                editor.apply();
                                 databaseReference.child(uid).child("Name").setValue(orgName);
                                 databaseReference.child(uid).child("Members").setValue(orgMembers);
                                 databaseReference.child(uid).child("Address").setValue(orgAddress);

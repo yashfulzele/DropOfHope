@@ -37,7 +37,6 @@ public class ShowRequestActivity extends AppCompatActivity implements showReques
     private DatabaseReference db_ref;
     private ValueEventListener mDBListener;
     private List<Map<String, String>> mUploads;
-
     private static final String TAG = "myTag";
 
     @Override
@@ -110,7 +109,6 @@ public class ShowRequestActivity extends AppCompatActivity implements showReques
         Map<String, String> selectedItem = mUploads.get(position);
         String selectedKey = selectedItem.get("Id");
         String uri_string = selectedItem.get("Image uri");
-//        Uri uri = Uri.parse(uri_string);
         if (Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid().equals(selectedKey)) {
             assert uri_string != null;
             StorageReference img_ref = mStorage.getReferenceFromUrl(uri_string);

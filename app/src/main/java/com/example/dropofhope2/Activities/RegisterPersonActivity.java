@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +32,7 @@ public class RegisterPersonActivity extends AppCompatActivity {
     private Spinner bloodGroupSp, isDonorSp;
     private Button registerBt;
     private SharedPreferences sharedPreferences;
+    private static final String MyPREFERENCES = "MyPrefs";
     private FirebaseAuth mAuth;
 
     @Override
@@ -43,7 +43,7 @@ public class RegisterPersonActivity extends AppCompatActivity {
         DatabaseReference databaseReference = database.getReference("Users/Person");
         mAuth = FirebaseAuth.getInstance();
         initViews();
-        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences = getApplicationContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         registerBt.setOnClickListener(v -> {
             String sex = "";
             final String name, age, contact_no, address, blood_group, isDonor, email, password;
@@ -66,8 +66,10 @@ public class RegisterPersonActivity extends AppCompatActivity {
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 String uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Type", "Person").apply();
-                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("Name", name).apply();
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("Type", "Person");
+                                editor.putString("Name", name);
+                                editor.apply();
                                 databaseReference.child(uid).child("Name").setValue(name);
                                 databaseReference.child(uid).child("Age").setValue(age);
                                 databaseReference.child(uid).child("Sex").setValue(finalSex);

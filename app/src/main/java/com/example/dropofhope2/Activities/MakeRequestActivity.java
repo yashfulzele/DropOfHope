@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -42,8 +43,9 @@ public class MakeRequestActivity extends AppCompatActivity {
     private StorageTask uploadTask;
     private DatabaseReference db_ref;
     private Uri imageUri;
-
-    private String TAG = "myTag";
+    private static final String TAG = "myTag";
+    private static final String MyPREFERENCES = "MyPrefs";
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class MakeRequestActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference("Requests/Images");
         db_ref = FirebaseDatabase.getInstance().getReference("Requests");
         initViews();
+        sharedPreferences = getApplicationContext().getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         progressBar.setVisibility(View.GONE);
         chooseImageTv.setOnClickListener(v -> chooseImage());
         submitRequestBt.setOnClickListener(v -> {
@@ -73,8 +76,8 @@ public class MakeRequestActivity extends AppCompatActivity {
         String imageId = (user.getUid() + "." + getExtension(imageUri));
         if (isValid(message, imageId)) {
             String uid = Objects.requireNonNull(user).getUid();
-            String type = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Type", "Person");
-            String name = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Name", "DEFAULT");
+            String type = sharedPreferences.getString("Type", null);
+            String name =sharedPreferences.getString("Name", null);
             StorageReference mRef = mStorageRef.child(imageId);
             uploadTask = mRef.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> {
@@ -99,6 +102,7 @@ public class MakeRequestActivity extends AppCompatActivity {
                     .addOnProgressListener(taskSnapshot -> {
                         double progress = (taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount()) * 100;
                         progressBar.setProgress((int) progress);
+                        Log.d(TAG, "Progressing...");
                     });
         }
     }
