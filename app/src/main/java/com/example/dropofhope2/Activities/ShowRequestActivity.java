@@ -1,6 +1,7 @@
 package com.example.dropofhope2.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -110,6 +111,28 @@ public class ShowRequestActivity extends AppCompatActivity implements showReques
         String selectedKey = selectedItem.get("Id");
         String uri_string = selectedItem.get("Image uri");
         if (Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid().equals(selectedKey)) {
+            AlertDialog alertDialog = new AlertDialog.Builder(ShowRequestActivity.this)
+                    .setTitle("Delete item")
+                    .setMessage("Do you really want to delete this item?")
+                    .setPositiveButton("Yes", ((dialogInterface, i) -> {
+                        assert uri_string != null;
+                        StorageReference img_ref = mStorage.getReferenceFromUrl(uri_string);
+                        img_ref.delete()
+                                .addOnSuccessListener(aVoid -> {
+                                    db_ref.child(selectedKey).removeValue();
+                                    showMessage("Item deleted successfully!");
+                                });
+                    }))
+                    .setNegativeButton("No", ((dialogInterface, i) -> Log.d(TAG, "Delete action cancelled")))
+                    .setCancelable(true)
+                    .show();
+        } else {
+            showMessage("You are not authorized to delete this post!");
+        }
+        /*Map<String, String> selectedItem = mUploads.get(position);
+        String selectedKey = selectedItem.get("Id");
+        String uri_string = selectedItem.get("Image uri");
+        if (Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid().equals(selectedKey)) {
             assert uri_string != null;
             StorageReference img_ref = mStorage.getReferenceFromUrl(uri_string);
             img_ref.delete()
@@ -119,7 +142,7 @@ public class ShowRequestActivity extends AppCompatActivity implements showReques
                     });
         } else {
             showMessage("You are not authorized to delete this post!");
-        }
+        }*/
     }
 
     @Override
