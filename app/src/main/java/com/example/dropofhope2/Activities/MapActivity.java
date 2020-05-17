@@ -1,17 +1,22 @@
 package com.example.dropofhope2.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
@@ -24,7 +29,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dropofhope2.R;
@@ -50,6 +54,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final String TAG = "myTag";
     private static final int PERMISSION_REQUEST_CODE = 9001;
     private static final int PLAY_SERVICES_ERROR_CODE = 9002;
+    private static final int GPS_REQUEST_CODE = 9003;
     private static final float DEFAULT_ZOOM = 17f;
 
     private GoogleMap mGoogleMap;
@@ -63,9 +68,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         initGoogleMap();
-        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        assert supportMapFragment != null;
-        supportMapFragment.getMapAsync(this);
         searchEt = findViewById(R.id.search_location);
         userAddress = Objects.requireNonNull(getIntent().getExtras()).getString("Address");
     }
@@ -74,10 +76,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         Log.d(TAG, "Map is showing");
         mGoogleMap = googleMap;
+        mGoogleMap.setMyLocationEnabled(true);
         getUserLocation(userAddress);
         init();
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
+        mGoogleMap.getUiSettings().setMapToolbarEnabled(true);
         try {
             final ViewGroup parent = (ViewGroup) Objects.requireNonNull(supportMapFragment.getView()).findViewWithTag("GoogleMapMyLocationButton").getParent();
             parent.post(() -> {
@@ -98,14 +101,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             });
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        try {
-            boolean success = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style));
-            if (!success) {
-                Log.e(TAG, "Style parsing failed.");
-            }
-        } catch (Resources.NotFoundException e) {
-            Log.e(TAG, "Can't find style. Error: ", e);
         }
     }
 
@@ -158,18 +153,47 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void initGoogleMap() {
         if (isServicesOK()) {
-            if (checkLocationPermission()) {
-                Log.d(TAG, "Ready to map!");
-            } else {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
+            if (isGPSEnabled()) {
+                if (checkLocationPermission()) {
+                    Log.d(TAG, "Ready to map!");
+                    supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+                    assert supportMapFragment != null;
+                    supportMapFragment.getMapAsync(MapActivity.this);
+                } else {
+                    requestLocationPermission();
                 }
             }
         }
     }
 
+    private boolean isGPSEnabled() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        assert locationManager != null;
+        boolean providerEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (providerEnabled) {
+            return true;
+        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setTitle("GPS Permission")
+                    .setMessage("GPS is required for this app to work. Please enable GPS!")
+                    .setPositiveButton("Yes", ((dialogInterface, i) -> {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivityForResult(intent, GPS_REQUEST_CODE);
+                    }))
+                    .setCancelable(false)
+                    .show();
+        }
+        return false;
+    }
+
     private boolean checkLocationPermission() {
         return (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+    }
+
+    private void requestLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
+        }
     }
 
     private boolean isServicesOK() {
@@ -239,10 +263,58 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 return true;
             case R.id.item_2:
+                mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                try {
+                    boolean success = mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.dark_map));
+                    if (!success) {
+                        Log.e(TAG, "Style parsing failed.");
+                    }
+                } catch (Resources.NotFoundException e) {
+                    Log.e(TAG, "Can't find style. Error: ", e);
+                }
+                return true;
+            case R.id.item_3:
+                mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                try {
+                    boolean success = mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.night_map));
+                    if (!success) {
+                        Log.e(TAG, "Style parsing failed.");
+                    }
+                } catch (Resources.NotFoundException e) {
+                    Log.e(TAG, "Can't find style. Error: ", e);
+                }
+                return true;
+            case R.id.item_4:
+                mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                try {
+                    boolean success = mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.aubergine_map));
+                    if (!success) {
+                        Log.e(TAG, "Style parsing failed.");
+                    }
+                } catch (Resources.NotFoundException e) {
+                    Log.e(TAG, "Can't find style. Error: ", e);
+                }
+                return true;
+            case R.id.item_5:
                 mGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
                 return true;
             default:
                 return false;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GPS_REQUEST_CODE) {
+            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            assert locationManager != null;
+            boolean providerEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            if (providerEnabled) {
+                Log.d(TAG, "GPS is enabled!");
+            } else {
+                Log.d(TAG, "GPS is not enabled!");
+            }
         }
     }
 

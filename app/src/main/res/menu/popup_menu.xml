@@ -3,11 +3,21 @@
     <item
         android:id="@+id/item_1"
         android:icon="@drawable/ic_map_black_24dp"
-        android:title="Normal" />
+        android:title="Normal mode" />
     <item
         android:id="@+id/item_2"
+        android:icon="@drawable/ic_brightness_6_black_24dp"
+        android:title="Dark mode" />
+    <item
+        android:id="@+id/item_3"
+        android:icon="@drawable/ic_airline_seat_individual_suite_black_24dp"
+        android:title="Night mode" />
+    <item
+        android:id="@+id/item_4"
+        android:icon="@drawable/ic_leak_add_black_24dp"
+        android:title="Aubergine mode" />
+    <item
+        android:id="@+id/item_5"
         android:icon="@drawable/ic_satellite_black_24dp"
-        android:title="Satellite" />
-
+        android:title="Satellite mode" />
 </menu>
-
