@@ -80,29 +80,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
         try {
             final ViewGroup parent = (ViewGroup) Objects.requireNonNull(supportMapFragment.getView()).findViewWithTag("GoogleMapMyLocationButton").getParent();
-            parent.post(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Resources r = getResources();
-                        //convert our dp margin into pixels
-                        int marginPixels = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, r.getDisplayMetrics());
-                        // Get the map compass view
-                        View mapCompass = parent.getChildAt(4);
-
-                        // create layoutParams, giving it our wanted width and height(important, by default the width is "match parent")
-                        RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(mapCompass.getHeight(), mapCompass.getHeight());
-                        // position on top right
-                        rlp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-                        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
-                        rlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
-                        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-                        //give compass margin
-                        rlp.setMargins(marginPixels, marginPixels, marginPixels, marginPixels);
-                        mapCompass.setLayoutParams(rlp);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+            parent.post(() -> {
+                try {
+                    Resources r = getResources();
+                    int marginPixels = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, r.getDisplayMetrics());
+                    View mapCompass = parent.getChildAt(4);
+                    RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(mapCompass.getHeight(), mapCompass.getHeight());
+                    rlp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+                    rlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+                    rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                    rlp.setMargins(marginPixels, marginPixels, marginPixels, marginPixels);
+                    mapCompass.setLayoutParams(rlp);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             });
         } catch (Exception ex) {
@@ -153,7 +144,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         try {
             list = geocoder.getFromLocationName(userAddress, 1);
         } catch (IOException e) {
-            Log.d(TAG, "geoLocate, error : " + e.getMessage());
+            Log.d(TAG, "getUserLocation, error : " + e.getMessage());
         }
         if (list.size() > 0) {
             Address address = list.get(0);
