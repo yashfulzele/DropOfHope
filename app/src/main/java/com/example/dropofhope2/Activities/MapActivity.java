@@ -9,20 +9,28 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dropofhope2.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -30,8 +38,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, PopupMenu.OnMenuItemClickListener {
@@ -39,9 +50,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final String TAG = "myTag";
     private static final int PERMISSION_REQUEST_CODE = 9001;
     private static final int PLAY_SERVICES_ERROR_CODE = 9002;
+    private static final float DEFAULT_ZOOM = 17f;
 
     private GoogleMap mGoogleMap;
     private SupportMapFragment supportMapFragment;
+
+    private EditText searchEt;
+    private String userAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +66,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         assert supportMapFragment != null;
         supportMapFragment.getMapAsync(this);
+        searchEt = findViewById(R.id.search_location);
+        userAddress = Objects.requireNonNull(getIntent().getExtras()).getString("Address");
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Log.d(TAG, "Map is showing");
         mGoogleMap = googleMap;
+        getUserLocation(userAddress);
+        init();
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
         mGoogleMap.getUiSettings().setMapToolbarEnabled(false);
         try {
@@ -67,12 +86,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     try {
                         Resources r = getResources();
                         //convert our dp margin into pixels
-                        int marginPixels = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, r.getDisplayMetrics());
+                        int marginPixels = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, r.getDisplayMetrics());
                         // Get the map compass view
                         View mapCompass = parent.getChildAt(4);
 
                         // create layoutParams, giving it our wanted width and height(important, by default the width is "match parent")
-                        RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(mapCompass.getHeight(),mapCompass.getHeight());
+                        RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(mapCompass.getHeight(), mapCompass.getHeight());
                         // position on top right
                         rlp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
                         rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
@@ -97,10 +116,53 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         } catch (Resources.NotFoundException e) {
             Log.e(TAG, "Can't find style. Error: ", e);
         }
-        /*MarkerOptions markerOptions = new MarkerOptions()
-                .title("Center of the world!")
-                .position(new LatLng(0,0));
-        mGoogleMap.addMarker(markerOptions);*/
+    }
+
+    private void init() {
+        searchEt.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE || event.getAction() == KeyEvent.ACTION_DOWN || event.getAction() == KeyEvent.KEYCODE_ENTER) {
+                geoLocate();
+            }
+            return false;
+        });
+        hideSoftKeyboard();
+    }
+
+    private void geoLocate() {
+        String searchString = searchEt.getText().toString();
+        Geocoder geocoder = new Geocoder(MapActivity.this);
+        List<Address> list = new ArrayList<>();
+        try {
+            list = geocoder.getFromLocationName(searchString, 1);
+        } catch (IOException e) {
+            Log.d(TAG, "geoLocate, error : " + e.getMessage());
+        }
+        if (list.size() > 0) {
+            Address address = list.get(0);
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM));
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .title(address.getAddressLine(0))
+                    .position(new LatLng(address.getLatitude(), address.getLongitude()));
+            mGoogleMap.addMarker(markerOptions);
+        }
+    }
+
+    private void getUserLocation(String userAddress) {
+        Geocoder geocoder = new Geocoder(MapActivity.this);
+        List<Address> list = new ArrayList<>();
+        try {
+            list = geocoder.getFromLocationName(userAddress, 1);
+        } catch (IOException e) {
+            Log.d(TAG, "geoLocate, error : " + e.getMessage());
+        }
+        if (list.size() > 0) {
+            Address address = list.get(0);
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM));
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .title(userAddress)
+                    .position(new LatLng(address.getLatitude(), address.getLongitude()));
+            mGoogleMap.addMarker(markerOptions);
+        }
     }
 
     private void initGoogleMap() {
@@ -139,6 +201,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        mLocationPermissionGranted = false;
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
@@ -190,5 +253,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             default:
                 return false;
         }
+    }
+
+    private void hideSoftKeyboard() {
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 }
