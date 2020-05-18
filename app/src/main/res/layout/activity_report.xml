@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3D3B3A"
+    android:background="@drawable/org_person"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".Activities.ReportActivity">
@@ -65,9 +65,9 @@
             android:id="@+id/display_image"
             android:layout_width="220dp"
             android:layout_height="240dp"
+            android:background="#fe1f550"
             android:layout_margin="15dp"
-            android:src="@drawable/ic_photo_library_black_24dp"
-            android:background="#8451A5" />
+            android:src="@drawable/ic_photo_library_black_24dp" />
 
         <Button
             android:id="@+id/choose_image"

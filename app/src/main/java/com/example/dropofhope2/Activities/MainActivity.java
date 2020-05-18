@@ -6,13 +6,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dropofhope2.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    private Button makeRequestBt, showRequestBt, reportBt, feedbackBt, logOutBt;
+    private Button makeRequestBt, showRequestBt, reportBt, feedbackBt;
+    private TextView logOutBt;
     private SharedPreferences sharedPreferences;
     private static final String MyPREFERENCES = "MyPrefs";
     FirebaseAuth mAuth;

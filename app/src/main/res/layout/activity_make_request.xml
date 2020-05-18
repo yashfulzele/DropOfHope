@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3D3B3A"
+    android:background="@drawable/register_back"
     tools:context=".Activities.MakeRequestActivity">
 
     <LinearLayout
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#B2C81E"
+            android:background="#3A8A61"
             android:fontFamily="@font/cinzel"
             android:paddingHorizontal="10dp"
             android:text="MAKE REQUEST"
@@ -83,7 +83,7 @@
                     android:padding="5dp"
                     android:textAlignment="gravity"
                     android:textColor="@android:color/black"
-                    android:textColorHint="@color/main_background"
+                    android:textColorHint="@color/hint"
                     android:textSize="22sp" />
 
             </FrameLayout>

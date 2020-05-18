@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/register_back"
     android:padding="10dp"
     tools:context=".Activities.RegisterPersonActivity">
 
@@ -25,7 +25,7 @@
             <EditText
                 android:id="@+id/person_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@null"
                 android:fontFamily="sans-serif"
                 android:hint="Name"
@@ -34,7 +34,7 @@
                 android:paddingBottom="7dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/hint"
-                android:textSize="23sp" />
+                android:textSize="19sp" />
 
         </FrameLayout>
 
@@ -56,14 +56,16 @@
                 <EditText
                     android:id="@+id/person_age"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@null"
                     android:fontFamily="sans-serif"
+                    android:gravity="center_vertical"
                     android:hint="Age"
                     android:inputType="number"
                     android:paddingStart="10dp"
                     android:paddingTop="18dp"
                     android:paddingBottom="16dp"
+                    android:textAlignment="gravity"
                     android:textColor="@android:color/black"
                     android:textColorHint="@color/hint"
                     android:textSize="23sp" />
@@ -85,7 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Male"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:textSize="22sp" />
 
                 <RadioButton
@@ -93,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Female"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:textSize="22sp" />
 
             </RadioGroup>
@@ -112,7 +114,7 @@
             <EditText
                 android:id="@+id/person_contact"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@null"
                 android:fontFamily="sans-serif"
                 android:hint="Contact number"
@@ -122,7 +124,7 @@
                 android:paddingBottom="7dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/hint"
-                android:textSize="23sp" />
+                android:textSize="19sp" />
 
         </FrameLayout>
 
@@ -138,7 +140,7 @@
             <EditText
                 android:id="@+id/person_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@null"
                 android:fontFamily="sans-serif"
                 android:hint="Address"
@@ -147,7 +149,7 @@
                 android:paddingBottom="7dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/hint"
-                android:textSize="23sp" />
+                android:textSize="19sp" />
 
         </FrameLayout>
 
@@ -163,7 +165,7 @@
             <EditText
                 android:id="@+id/person_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@null"
                 android:fontFamily="sans-serif"
                 android:hint="Email Address"
@@ -173,7 +175,7 @@
                 android:paddingBottom="7dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/hint"
-                android:textSize="23sp" />
+                android:textSize="19sp" />
 
         </FrameLayout>
 
@@ -189,9 +191,8 @@
             <EditText
                 android:id="@+id/person_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@null"
-                android:fontFamily="sans-serif"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:paddingStart="10dp"
@@ -199,7 +200,7 @@
                 android:paddingBottom="7dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/hint"
-                android:textSize="23sp" />
+                android:textSize="19sp" />
 
         </FrameLayout>
 
@@ -234,12 +235,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="108dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/button_bg"
             android:fontFamily="@font/cinzel"
-            android:padding="10dp"
+            android:gravity="center"
             android:text="Register"
-            android:textSize="23sp"
+            android:textAlignment="gravity"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
     </LinearLayout>

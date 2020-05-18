@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3D3B3A"
+    android:background="@drawable/login_back"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".Activities.FeedBackActivity">
@@ -35,13 +35,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/mild_rounded_corners">
+        android:background="@drawable/mild_rounded_corners"
+        android:backgroundTint="#fc1fff0">
 
         <RadioButton
             android:id="@+id/bt_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:buttonTint="@color/hint"
             android:fontFamily="@font/cinzel"
             android:paddingStart="15dp"
             android:text="Very bad !   X-("
@@ -53,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:buttonTint="@color/hint"
             android:fontFamily="@font/cinzel"
             android:paddingStart="15dp"
             android:text="Not Bad !   : ("
@@ -64,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:buttonTint="@color/hint"
             android:fontFamily="@font/cinzel"
             android:paddingStart="15dp"
             android:text="Good, Scope of Improvement !   : )"
@@ -75,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:buttonTint="@color/hint"
             android:fontFamily="@font/cinzel"
             android:paddingStart="15dp"
             android:text="Very Good !    8D"
@@ -87,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:buttonTint="@color/hint"
             android:fontFamily="@font/cinzel"
             android:paddingStart="15dp"
             android:text="Excellent !    (^_^)"
@@ -106,6 +112,7 @@
         android:text="Submit"
         android:textSize="17sp"
         android:textStyle="bold" />
+
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="60dp"

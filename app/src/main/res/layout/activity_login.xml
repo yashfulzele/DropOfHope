@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3C3939"
+    android:background="@drawable/login_back"
     android:padding="20dp"
     tools:context=".Activities.LoginActivity">
 
@@ -18,7 +18,7 @@
             android:layout_height="150dp"
             android:layout_marginBottom="40dp"
             android:layout_gravity="center"
-            android:src="@drawable/login_logo" />
+            android:src="@drawable/login_logo_new" />
 
         <RadioGroup
             android:layout_width="match_parent"

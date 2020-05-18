@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@drawable/register_back"
     android:padding="10dp"
     tools:context=".Activities.RegisterOrganizationActivity">
 
@@ -25,7 +25,7 @@
             <EditText
                 android:id="@+id/organization_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@null"
                 android:fontFamily="sans-serif"
                 android:hint="Name of organization"
@@ -41,6 +41,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:orientation="horizontal">
 
             <FrameLayout
@@ -56,7 +57,7 @@
                 <EditText
                     android:id="@+id/organization_contact"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@null"
                     android:fontFamily="sans-serif"
                     android:hint="Contact number"
@@ -83,7 +84,7 @@
                 <EditText
                     android:id="@+id/organization_members"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@null"
                     android:fontFamily="sans-serif"
                     android:hint="Members"
@@ -112,7 +113,7 @@
             <EditText
                 android:id="@+id/organization_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@null"
                 android:fontFamily="sans-serif"
                 android:hint="Address"
@@ -137,7 +138,7 @@
             <EditText
                 android:id="@+id/organization_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@null"
                 android:fontFamily="sans-serif"
                 android:hint="Email address"
@@ -163,9 +164,8 @@
             <EditText
                 android:id="@+id/organization_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@null"
-                android:fontFamily="sans-serif"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:paddingStart="10dp"
@@ -198,9 +198,10 @@
             android:layout_marginTop="50dp"
             android:background="@drawable/button_bg"
             android:fontFamily="@font/cinzel"
-            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:text="Register"
-            android:textSize="23sp"
+            android:textSize="21sp"
             android:textStyle="bold" />
 
         <ProgressBar

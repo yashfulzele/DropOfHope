@@ -5,6 +5,7 @@
     <string name="map_api_key">AIzaSyAOreoo9Shi0hc1vO5oSAu4srQ90QW3VqI</string>
     <string name="access_token">sk.eyJ1IjoieWFzaGZ1bHplbGUiLCJhIjoiY2thOHFxZGh4MGNhbzJ0bDU1aHFuY2V3dCJ9.z4OlTVnVVk-YspkDDH_8Vw</string>
     <string name="navigation_guidance_night" translatable="false">mapbox://styles/mapbox/navigation-guidance-night-v2</string>
+    <string name="log_out"><u>Log out</u></string>
     <array name="blood_group">
         <item>Select your blood group</item>
         <item>A+</item>
