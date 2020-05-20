@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MapActivity">
 
+    <ImageView
+        android:id="@+id/get_location"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_my_location_black_24dp"
+        android:elevation="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/frame"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"/>
+
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
@@ -43,6 +54,8 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

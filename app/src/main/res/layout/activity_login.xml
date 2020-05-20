@@ -47,8 +47,7 @@
                 android:background="@drawable/mild_rounded_corners"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="Organization"
-                android:textsize="33sp" />
+                android:text="Organization" />
         </RadioGroup>
 
         <FrameLayout
