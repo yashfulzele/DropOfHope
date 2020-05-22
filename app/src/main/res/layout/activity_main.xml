@@ -58,6 +58,16 @@
             android:text="Feedback"
             android:textStyle="bold" />
 
+        <Button
+            android:id="@+id/about_app"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/button_bg"
+            android:fontFamily="@font/cinzel"
+            android:text="About app"
+            android:textStyle="bold" />
+
 
     </LinearLayout>
 
@@ -68,10 +78,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
         android:background="#4D000000"
-        android:fontFamily="@font/cinzel"
+        android:fontFamily="serif"
         android:text="@string/log_out"
         android:textAlignment="center"
         android:textColor="@color/hint"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        android:textSize="17dp" />
 </RelativeLayout>
