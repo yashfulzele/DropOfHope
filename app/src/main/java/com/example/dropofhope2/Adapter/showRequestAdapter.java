@@ -109,7 +109,6 @@ public class showRequestAdapter extends RecyclerView.Adapter<showRequestAdapter.
 
     public interface OnItemClickListener {
         void OnItemClick(int position);
-
         void OnDeleteClick(int position);
     }
 

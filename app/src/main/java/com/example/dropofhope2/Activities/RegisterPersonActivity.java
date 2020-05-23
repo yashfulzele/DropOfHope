@@ -73,6 +73,7 @@ public class RegisterPersonActivity extends AppCompatActivity {
                                 databaseReference.child(uid).child("Name").setValue(name);
                                 databaseReference.child(uid).child("Age").setValue(age);
                                 databaseReference.child(uid).child("Sex").setValue(finalSex);
+                                databaseReference.child(uid).child("Email").setValue(email);
                                 databaseReference.child(uid).child("Address").setValue(address);
                                 databaseReference.child(uid).child("Contact").setValue(contact_no);
                                 databaseReference.child(uid).child("Blood group").setValue(blood_group);

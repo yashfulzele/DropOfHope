@@ -15,7 +15,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.AboutAppActivity"></activity>
+        <activity android:name=".Activities.OrganizationDetailsActivity"></activity>
+        <activity android:name=".Activities.PersonDetailsActivity" />
+        <activity android:name=".Activities.AdminFeedbackActivity" />
+        <activity android:name=".Activities.AdminReportsActivity" />
+        <activity android:name=".Activities.AdminUsersActivity" />
+        <activity android:name=".Activities.AdminMainActivity" />
+        <activity android:name=".Activities.AdminAuthActivity" />
+        <activity android:name=".Activities.AboutAppActivity" />
         <activity android:name=".Activities.MapActivity" />
         <activity android:name=".Activities.DetailsActivity" />
         <activity android:name=".Activities.ShowRequestActivity" />

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,18 +23,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/card_image"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:background="@drawable/no_border_rounded_corners"
-                android:src="@drawable/default_user" />
-
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="2.5"
                 android:orientation="vertical">
 
@@ -44,25 +36,11 @@
                     android:fontFamily="serif"
                     android:paddingStart="15dp"
                     android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
                     android:paddingEnd="5dp"
                     android:text="Yash Fulzele"
                     android:textColor="@android:color/black"
-                    android:textSize="23sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/card_message"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="center_vertical"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="This is a demo message"
-                    android:textAlignment="gravity"
-                    android:textColor="@color/main_background"
-                    android:textSize="20sp" />
+                    android:textSize="23sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
