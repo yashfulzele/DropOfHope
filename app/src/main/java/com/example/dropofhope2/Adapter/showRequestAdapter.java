@@ -58,6 +58,11 @@ public class showRequestAdapter extends RecyclerView.Adapter<showRequestAdapter.
         return mUploads.size();
     }
 
+    public void filterList(List<Map<String, String>> filteredList) {
+        mUploads = filteredList;
+        notifyDataSetChanged();
+    }
+
     public class showRequestViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
         public TextView textView, textHead;
         public ImageView imageView;

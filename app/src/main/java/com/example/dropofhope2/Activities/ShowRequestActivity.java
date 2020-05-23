@@ -8,8 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -32,12 +39,17 @@ import java.util.Objects;
 
 public class ShowRequestActivity extends AppCompatActivity implements showRequestAdapter.OnItemClickListener {
     private RecyclerView recyclerView;
-    private showRequestAdapter mAdapter;
+    private EditText searchUsersEt;
     private ProgressBar progressBar;
+    private ImageView searchIconIv;
+
+    private showRequestAdapter mAdapter;
+    private List<Map<String, String>> mUploads;
+
     private FirebaseStorage mStorage;
     private DatabaseReference db_ref;
     private ValueEventListener mDBListener;
-    private List<Map<String, String>> mUploads;
+
     private static final String TAG = "myTag";
 
     @Override
@@ -80,10 +92,51 @@ public class ShowRequestActivity extends AppCompatActivity implements showReques
                 progressBar.setVisibility(View.INVISIBLE);
             }
         });
+        init();
+    }
+
+    private void init() {
+        searchUsersEt.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE || event.getAction() == KeyEvent.ACTION_DOWN || event.getAction() == KeyEvent.KEYCODE_ENTER) {
+                searchUsersEt.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (s.toString().length() > 0) {
+                            searchIconIv.setVisibility(View.GONE);
+                            filter(s.toString());
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+        hideSoftKeyboard();
+    }
+
+    private void filter(String text) {
+        List<Map<String, String>> filteredList = new ArrayList<>();
+        for (Map<String, String> map : mUploads) {
+            if (Objects.requireNonNull(map.get("Name")).toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(map);
+            }
+        }
+        mAdapter.filterList(filteredList);
     }
 
     private void initViews() {
         recyclerView = findViewById(R.id.recycler_view);
+        searchUsersEt = findViewById(R.id.search_users);
+        searchIconIv = findViewById(R.id.search_icon);
         progressBar = findViewById(R.id.progress_circular);
     }
 
@@ -149,5 +202,9 @@ public class ShowRequestActivity extends AppCompatActivity implements showReques
     protected void onDestroy() {
         super.onDestroy();
         db_ref.removeEventListener(mDBListener);
+    }
+
+    private void hideSoftKeyboard() {
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 }

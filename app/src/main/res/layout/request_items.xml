@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp">
+    android:padding="5dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/request_cards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/mild_rounded_corners"
-        android:backgroundTint="@color/main_background"
+        android:backgroundTint="#515153"
         app:cardElevation="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,43 +25,44 @@
             <ImageView
                 android:id="@+id/card_image"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
-                android:src="@drawable/default_user"/>
+                android:layout_margin="3dp"
+                android:background="@drawable/no_border_rounded_corners"
+                android:src="@drawable/default_user" />
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
+                android:layout_height="100dp"
+                android:layout_weight="2.5"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/card_text_head"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/cinzel"
+                    android:fontFamily="serif"
                     android:paddingStart="15dp"
-                    android:paddingTop="5dp"
+                    android:paddingTop="15dp"
                     android:paddingEnd="5dp"
                     android:text="Yash Fulzele"
                     android:textColor="@android:color/black"
-                    android:textSize="23sp" />
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/card_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="serif-monospace"
+                    android:fontFamily="sans-serif-medium"
                     android:gravity="center_vertical"
                     android:paddingStart="15dp"
-                    android:paddingTop="5dp"
                     android:paddingEnd="5dp"
                     android:paddingBottom="5dp"
                     android:text="This is a demo message"
                     android:textAlignment="gravity"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/main_background"
+                    android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

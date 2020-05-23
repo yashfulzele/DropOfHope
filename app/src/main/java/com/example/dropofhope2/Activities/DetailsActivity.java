@@ -63,8 +63,10 @@ public class DetailsActivity extends AppCompatActivity {
                         upload.put("Address", dataSnapshot.child("Address").getValue(String.class));
                         if (type.equals("Person")) {
                             upload.put("Blood Group", dataSnapshot.child("Blood Group").getValue(String.class));
+                            upload.put("isDonor", dataSnapshot.child("isDonor").getValue(String.class));
                         } else {
                             upload.put("Blood Group", "-----");
+                            upload.put("isDonor", "-----");
                         }
                         upload.put("Email", dataSnapshot.child("Email").getValue(String.class));
                         profileContactTv.setText(upload.get("Contact"));
