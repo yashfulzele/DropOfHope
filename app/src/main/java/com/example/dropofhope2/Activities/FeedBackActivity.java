@@ -1,8 +1,10 @@
 package com.example.dropofhope2.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -26,48 +28,49 @@ public class FeedBackActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private DatabaseReference db_ref;
     private FirebaseAuth mAuth;
+    private SharedPreferences sharedPreferences;
+    private static final String MyPREFERENCES = "MyPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_back);
         db_ref = FirebaseDatabase.getInstance().getReference("Feedback");
+        sharedPreferences = getApplicationContext().getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         mAuth = FirebaseAuth.getInstance();
         initViews();
-        String type = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("Type", "Person");
         hideProgressBar();
         if (mAuth.getCurrentUser() != null) {
-            submitFeedbackBt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showProgressBar();
-                    String feedback = "";
-                    boolean valid = true;
-                    if (bt1.isChecked()) {
-                        feedback = "Very bad";
-                    } else if (bt2.isChecked()) {
-                        feedback = "Not bad";
-                    } else if (bt3.isChecked()) {
-                        feedback = "Good";
-                    } else if (bt4.isChecked()) {
-                        feedback = "Very bad";
-                    } else if (bt5.isChecked()) {
-                        feedback = "Excellent";
-                    } else {
-                        showMessage("Select option as per your experience");
-                        valid = false;
-                    }
-                    if (valid) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        String uid = user.getUid();
-                        Map<String, String> map = new HashMap<>();
-                        map.put("Email", user.getEmail());
-                        map.put("Feedback", feedback);
-                        db_ref.child(uid).setValue(map);
-                        hideProgressBar();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        FeedBackActivity.this.finish();
-                    }
+            submitFeedbackBt.setOnClickListener(v -> {
+                showProgressBar();
+                String feedback = "";
+                boolean valid = true;
+                if (bt1.isChecked()) {
+                    feedback = "Very bad";
+                } else if (bt2.isChecked()) {
+                    feedback = "Not bad";
+                } else if (bt3.isChecked()) {
+                    feedback = "Good";
+                } else if (bt4.isChecked()) {
+                    feedback = "Very bad";
+                } else if (bt5.isChecked()) {
+                    feedback = "Excellent";
+                } else {
+                    showMessage("Select option as per your experience");
+                    valid = false;
+                }
+                if (valid) {
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    String uid = user.getUid();
+                    String name =sharedPreferences.getString("Name", null);
+                    Map<String, String> map = new HashMap<>();
+                    map.put("Email", user.getEmail());
+                    map.put("Name", name);
+                    map.put("Feedback", feedback);
+                    db_ref.child(uid).setValue(map);
+                    hideProgressBar();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    FeedBackActivity.this.finish();
                 }
             });
         }

@@ -95,8 +95,8 @@ public class MakeRequestActivity extends AppCompatActivity {
                             map.put("Id", uid);
                             db_ref.child(uid).setValue(map);
                         });
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        MakeRequestActivity.this.finish();
+                        /*startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        MakeRequestActivity.this.finish();*/
                     })
                     .addOnFailureListener(exception -> showMessage("Something went wrong :("))
                     .addOnProgressListener(taskSnapshot -> {

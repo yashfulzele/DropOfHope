@@ -1,7 +1,6 @@
 package com.example.dropofhope2.Adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dropofhope2.R;
 import com.squareup.picasso.Picasso;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 

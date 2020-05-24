@@ -4,17 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/register_back"
-    tools:context=".Activities.DetailsActivity">
+    android:background="@drawable/login_back"
+    tools:context=".Activities.ReportsDetailActivity">
 
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/default_user"
-        tools:layout_editor_absoluteY="113dp" />
+        android:layout_height="250dp"
+        android:src="@drawable/default_user" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -52,7 +49,7 @@
                     android:text="Yash Aniruddha Fulzele"
                     android:textAlignment="gravity"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="19sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -79,33 +76,7 @@
                     android:fontFamily="casual"
                     android:text="yashfulzele003@gmail.com"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/mild_rounded_corners"
-                android:backgroundTint="#5D5B59">
-
-                <ImageView
-                    android:id="@+id/phone_icon"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
-                    android:src="@drawable/ic_phone_black_24dp" />
-
-                <TextView
-                    android:id="@+id/profile_contact"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@id/phone_icon"
-                    android:fontFamily="casual"
-                    android:text="8207029999"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -136,74 +107,6 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/mild_rounded_corners"
-                android:backgroundTint="#5D5B59">
-
-                <ImageView
-                    android:id="@+id/heart_icon"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
-                    android:src="@drawable/ic_favorite_black_24dp" />
-
-                <TextView
-                    android:id="@+id/profile_blood_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@id/heart_icon"
-                    android:fontFamily="casual"
-                    android:text="A+"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/mild_rounded_corners"
-                android:backgroundTint="#5D5B59">
-
-                <ImageView
-                    android:id="@+id/pan_tool"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
-                    android:src="@drawable/ic_pan_tool_black_24dp" />
-
-                <TextView
-                    android:id="@+id/profile_Donor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@id/pan_tool"
-                    android:fontFamily="casual"
-                    android:gravity="center_vertical"
-                    android:text="Yes"
-                    android:textAlignment="gravity"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/get_location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="70dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/mild_rounded_corners"
-        android:backgroundTint="@color/hint"
-        android:elevation="222dp"
-        android:text="Get Location" />
 </RelativeLayout>

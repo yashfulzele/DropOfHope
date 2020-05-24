@@ -111,7 +111,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         Log.d(TAG, "Map is showing");
         mGoogleMap = googleMap;
-        //mGoogleMap.setMyLocationEnabled(true);
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
         mGoogleMap.getUiSettings().setMapToolbarEnabled(true);
         getUserLocation(userAddress);

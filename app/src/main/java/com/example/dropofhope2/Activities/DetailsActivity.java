@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -85,6 +83,11 @@ public class DetailsActivity extends AppCompatActivity {
         getLocationBt.setOnClickListener(v -> {
             Intent intent = new Intent(DetailsActivity.this, MapActivity.class);
             intent.putExtra("Address", Address);
+            startActivity(intent);
+        });
+        profileImageIv.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), FullImageActivity.class);
+            intent.putExtra("Image uri", Objects.requireNonNull(getIntent().getExtras()).getString("Image uri", null));
             startActivity(intent);
         });
     }

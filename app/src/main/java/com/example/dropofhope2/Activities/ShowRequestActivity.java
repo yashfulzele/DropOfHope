@@ -182,20 +182,6 @@ public class ShowRequestActivity extends AppCompatActivity implements showReques
         } else {
             showMessage("You are not authorized to delete this post!");
         }
-        /*Map<String, String> selectedItem = mUploads.get(position);
-        String selectedKey = selectedItem.get("Id");
-        String uri_string = selectedItem.get("Image uri");
-        if (Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid().equals(selectedKey)) {
-            assert uri_string != null;
-            StorageReference img_ref = mStorage.getReferenceFromUrl(uri_string);
-            img_ref.delete()
-                    .addOnSuccessListener(aVoid -> {
-                        db_ref.child(selectedKey).removeValue();
-                        showMessage("Item deleted successfully!");
-                    });
-        } else {
-            showMessage("You are not authorized to delete this post!");
-        }*/
     }
 
     @Override

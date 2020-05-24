@@ -1,9 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_back"
     tools:context=".Activities.PersonDetailsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="100dp"
+        android:padding="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/mild_rounded_corners"
+            android:backgroundTint="#5D5B59">
+
+            <ImageView
+                android:id="@+id/person_icon"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_person_black_24dp" />
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/person_icon"
+                android:fontFamily="casual"
+                android:gravity="center_vertical"
+                android:text="Yash Aniruddha Fulzele"
+                android:textAlignment="gravity"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/mild_rounded_corners"
+                android:backgroundTint="#5D5B59">
+
+                <TextView
+                    android:id="@+id/person_age"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="casual"
+                    android:gravity="center_vertical"
+                    android:text="Age"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/person_age"
+                    android:fontFamily="casual"
+                    android:gravity="center_vertical"
+                    android:text="20"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/mild_rounded_corners"
+                android:backgroundTint="#5D5B59">
+
+                <TextView
+                    android:id="@+id/person_sex"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="casual"
+                    android:gravity="center_vertical"
+                    android:text="Sex"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profile_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/person_sex"
+                    android:fontFamily="casual"
+                    android:gravity="center_vertical"
+                    android:text="Male"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/mild_rounded_corners"
+            android:backgroundTint="#5D5B59">
+
+            <ImageView
+                android:id="@+id/email_icon"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_email_black_24dp" />
+
+            <TextView
+                android:id="@+id/profile_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/email_icon"
+                android:fontFamily="casual"
+                android:text="yashfulzele003@gmail.com"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/mild_rounded_corners"
+            android:backgroundTint="#5D5B59">
+
+            <ImageView
+                android:id="@+id/home_icon"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_home_black_24dp" />
+
+            <TextView
+                android:id="@+id/profile_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/home_icon"
+                android:fontFamily="casual"
+                android:text="Nagpur"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/mild_rounded_corners"
+            android:backgroundTint="#5D5B59">
+
+            <ImageView
+                android:id="@+id/phone_icon"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:src="@drawable/ic_phone_black_24dp" />
+
+            <TextView
+                android:id="@+id/profile_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/phone_icon"
+                android:fontFamily="casual"
+                android:text="8207029999"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/mild_rounded_corners"
+            android:backgroundTint="#5D5B59">
+
+            <ImageView
+                android:id="@+id/heart_icon"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:src="@drawable/ic_favorite_black_24dp" />
+
+            <TextView
+                android:id="@+id/profile_blood_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/heart_icon"
+                android:fontFamily="casual"
+                android:text="A+"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/mild_rounded_corners"
+            android:backgroundTint="#5D5B59">
+
+            <ImageView
+                android:id="@+id/pan_tool"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:src="@drawable/ic_pan_tool_black_24dp" />
+
+            <TextView
+                android:id="@+id/profile_Donor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/pan_tool"
+                android:fontFamily="casual"
+                android:gravity="center_vertical"
+                android:text="Yes"
+                android:textAlignment="gravity"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.OrganizationDetailsActivity"></activity>
+        <activity android:name=".Activities.FullImageActivity"></activity>
+        <activity android:name=".Activities.ReportsDetailActivity" />
+        <activity android:name=".Activities.OrganizationDetailsActivity" />
         <activity android:name=".Activities.PersonDetailsActivity" />
         <activity android:name=".Activities.AdminFeedbackActivity" />
         <activity android:name=".Activities.AdminReportsActivity" />

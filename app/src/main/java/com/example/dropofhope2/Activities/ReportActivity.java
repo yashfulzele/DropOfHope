@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +38,9 @@ public class ReportActivity extends AppCompatActivity {
     private StorageTask uploadTask;
     private DatabaseReference db_ref;
     private FirebaseAuth mAuth;
+    private SharedPreferences sharedPreferences;
+    private static final String MyPREFERENCES = "MyPrefs";
+    private static final String TAG = "MyTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,9 @@ public class ReportActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference("Report/Images");
         db_ref = FirebaseDatabase.getInstance().getReference("Report");
+        sharedPreferences = getApplicationContext().getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         initViews();
+        Log.d(TAG, "You are in ReportActivity !");
         if (mAuth.getCurrentUser() != null) {
             chooseBt.setOnClickListener(v -> chooseImage());
             reportBt.setOnClickListener(v -> {
@@ -101,15 +108,23 @@ public class ReportActivity extends AppCompatActivity {
         assert user != null;
         String imageId = (user.getUid() + "." + getExtension(imageUri));
         if (isValid(message, imageId)) {
+            String name = sharedPreferences.getString("Name", null);
             String uid = Objects.requireNonNull(user).getUid();
-            Map<String, String> map = new HashMap<>();
-            map.put("Message", message);
-            map.put("Email", user.getEmail());
-            map.put("Image Id", imageId);
-            db_ref.child(uid).setValue(map);
             StorageReference mRef = mStorageRef.child(imageId);
             uploadTask = mRef.putFile(imageUri)
-                    .addOnSuccessListener(taskSnapshot -> showMessage("Image uploaded successfully!"))
+                    .addOnSuccessListener(taskSnapshot -> {
+                        showMessage("Image uploaded successfully!");
+                        mRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                            String url = uri.toString();
+                            Map<String, String> map = new HashMap<>();
+                            map.put("Message", message);
+                            map.put("Name", name);
+                            map.put("Email", user.getEmail());
+                            map.put("Image uri", url);
+                            map.put("Id", uid);
+                            db_ref.child(uid).setValue(map);
+                        });
+                    })
                     .addOnFailureListener(exception -> showMessage("Something went wrong :("));
         }
     }

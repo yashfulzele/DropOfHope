@@ -1,13 +1,11 @@
 package com.example.dropofhope2.Activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,14 +18,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 
 import com.example.dropofhope2.Adapter.adminUsersAdapter;
 import com.example.dropofhope2.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,7 +41,6 @@ public class AdminUsersActivity extends AppCompatActivity implements adminUsersA
     private RecyclerView recyclerView;
     private EditText searchUsersEt;
     private ProgressBar progressBar;
-    private ImageView searchIconIv;
 
     private adminUsersAdapter mAdapter;
     private List<Map<String, String>> mUsers;
@@ -61,7 +55,6 @@ public class AdminUsersActivity extends AppCompatActivity implements adminUsersA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_users);
         initViews();
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mUsers = new ArrayList<>();
@@ -75,8 +68,7 @@ public class AdminUsersActivity extends AppCompatActivity implements adminUsersA
     private void initViews() {
         recyclerView = findViewById(R.id.recycler_view);
         searchUsersEt = findViewById(R.id.search_users);
-        searchIconIv = findViewById(R.id.search_icon);
-        progressBar = findViewById(R.id.progress_circular);
+        progressBar = findViewById(R.id.progress_circular_users);
     }
 
     private void init() {
@@ -96,7 +88,6 @@ public class AdminUsersActivity extends AppCompatActivity implements adminUsersA
                     @Override
                     public void afterTextChanged(Editable s) {
                         if (s.toString().length() > 0) {
-                            searchIconIv.setVisibility(View.GONE);
                             filter(s.toString());
                         }
                     }
@@ -240,11 +231,11 @@ public class AdminUsersActivity extends AppCompatActivity implements adminUsersA
         } else {
             Intent intent = new Intent(AdminUsersActivity.this, OrganizationDetailsActivity.class);
             intent.putExtra("Name", selectedItem.get("Name"));
+            intent.putExtra("Contact", selectedItem.get("Contact"));
             intent.putExtra("Members", selectedItem.get("Members"));
             intent.putExtra("Email", selectedItem.get("Email"));
-            intent.putExtra("Organization type", selectedItem.get("Organization type"));
             intent.putExtra("Address", selectedItem.get("Address"));
-            intent.putExtra("Contact", selectedItem.get("Contact"));
+            intent.putExtra("Organization type", selectedItem.get("Organization type"));
             startActivity(intent);
         }
     }
