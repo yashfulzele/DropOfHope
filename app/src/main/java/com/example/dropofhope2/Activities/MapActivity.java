@@ -97,9 +97,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Location location = locationResult.getLastLocation();
                 runOnUiThread(() -> {
                     gotoLocation(location.getLatitude(), location.getLongitude());
+                    showMarker(location.getLatitude(), location.getLongitude(), "My location");
                     Log.d(TAG, "runOnUiThread : Thread name : " + Thread.currentThread().getName());
                 });
-                showMarker(location.getLatitude(), location.getLongitude(), "My location");
                 Log.d(TAG, location.getLatitude() + ", " + location.getLongitude());
                 Log.d(TAG, "Thread name : " + Thread.currentThread().getName());
             }
