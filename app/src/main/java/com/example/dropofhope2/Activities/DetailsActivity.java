@@ -87,7 +87,7 @@ public class DetailsActivity extends AppCompatActivity {
         });
         profileImageIv.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), FullImageActivity.class);
-            intent.putExtra("Image uri", Objects.requireNonNull(getIntent().getExtras()).getString("Image uri", null));
+            intent.putExtra("Image uri", Objects.requireNonNull(getIntent().getExtras()).getString("Image uri"));
             startActivity(intent);
         });
     }
