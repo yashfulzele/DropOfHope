@@ -68,7 +68,7 @@ public class DetailsActivity extends AppCompatActivity {
                         }
                         upload.put("Email", dataSnapshot.child("Email").getValue(String.class));
                         profileContactTv.setText(upload.get("Contact"));
-                        profileBloodGroupTv.setText(upload.get("Blood Group"));
+                        profileBloodGroupTv.setText(upload.get("Blood group"));
                         profileEmailTv.setText(upload.get("Email"));
                         Address = upload.get("Address");
                         Log.d(TAG, "Address : " + Address);

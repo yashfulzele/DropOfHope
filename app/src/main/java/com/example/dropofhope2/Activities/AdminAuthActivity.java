@@ -43,10 +43,10 @@ public class AdminAuthActivity extends AppCompatActivity {
     }
 
     private boolean isValid(String username, String password) {
-        if (username.equals("yashfulzele")) {
+        if (!username.equals("yashfulzele")) {
             adminUsernameEt.setError("Username is wrong!");
             return false;
-        } else if (password.equals("password003")) {
+        } else if (!password.equals("password003")) {
             adminPasswordEt.setError("Password is wrong!");
             return false;
         }

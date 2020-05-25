@@ -99,7 +99,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     gotoLocation(location.getLatitude(), location.getLongitude());
                     Log.d(TAG, "runOnUiThread : Thread name : " + Thread.currentThread().getName());
                 });
-                //showMarker(location.getLatitude(), location.getLongitude());
+                showMarker(location.getLatitude(), location.getLongitude(), "My location");
                 Log.d(TAG, location.getLatitude() + ", " + location.getLongitude());
                 Log.d(TAG, "Thread name : " + Thread.currentThread().getName());
             }
@@ -373,8 +373,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void getLocationUpdates() {
         LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        locationRequest.setInterval(10 * 1000);
-        locationRequest.setFastestInterval(5000);
+        locationRequest.setInterval(100 * 1000);
+        locationRequest.setFastestInterval(10 * 1000);
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             return ;
         }
@@ -383,9 +383,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mLocationClient.requestLocationUpdates(locationRequest, mLocationCallback, mHandlerThread.getLooper());
     }
 
-    private void showMarker(double lat, double lng) {
+    private void showMarker(double lat, double lng, String title) {
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(new LatLng(lat, lng));
+        markerOptions.position(new LatLng(lat, lng)).title(title);
         mGoogleMap.addMarker(markerOptions);
     }
 
