@@ -134,7 +134,7 @@ public class AdminUsersActivity extends AppCompatActivity implements adminUsersA
             }
         }
         popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.popup_menu);
+        popup.inflate(R.menu.person_or_organization);
         popup.show();
     }
 

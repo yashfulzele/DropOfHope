@@ -66,7 +66,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final int PERMISSION_REQUEST_CODE = 9001;
     private static final int PLAY_SERVICES_ERROR_CODE = 9002;
     private static final int GPS_REQUEST_CODE = 9003;
-    private static final float DEFAULT_ZOOM = 17f;
+    private static final float DEFAULT_ZOOM = 19f;
 
     private GoogleMap mGoogleMap;
     private SupportMapFragment supportMapFragment;
@@ -75,7 +75,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private HandlerThread mHandlerThread;
 
     private EditText searchEt;
-    private ImageView getLocationIv;
+    private ImageView getLocationIv, getUserLocationIv;
     private String userAddress;
 
     @Override
@@ -83,10 +83,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         initGoogleMap();
-        searchEt = findViewById(R.id.search_location);
-        getLocationIv = findViewById(R.id.get_location);
         userAddress = Objects.requireNonNull(getIntent().getExtras()).getString("Address");
-
+        initViews();
         mLocationClient = LocationServices.getFusedLocationProviderClient(this);
         mLocationCallback = new LocationCallback() {
             @Override
@@ -105,6 +103,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         };
         getLocationIv.setOnClickListener(v -> getLocationUpdates());
+        getUserLocationIv.setOnClickListener(v -> getUserLocation(userAddress));
     }
 
     @Override
@@ -146,6 +145,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             return false;
         });
         hideSoftKeyboard();
+    }
+
+    private void initViews() {
+        searchEt = findViewById(R.id.search_location);
+        getLocationIv = findViewById(R.id.get_location);
+        getUserLocationIv = findViewById(R.id.get_user_location);
     }
 
     private void geoLocate() {
@@ -375,8 +380,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         locationRequest.setInterval(100 * 1000);
         locationRequest.setFastestInterval(10 * 1000);
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            return ;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
         mHandlerThread = new HandlerThread("LocationCallbackThread");
         mHandlerThread.start();
@@ -400,6 +405,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             mLocationClient.removeLocationUpdates(mLocationCallback);
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
