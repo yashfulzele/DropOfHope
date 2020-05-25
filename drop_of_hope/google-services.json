@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "549747639946",
+    "firebase_url": "https://dropofhope-63d24.firebaseio.com",
+    "project_id": "dropofhope-63d24",
+    "storage_bucket": "dropofhope-63d24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549747639946:android:2e9302d5721cbf3997cf73",
+        "android_client_info": {
+          "package_name": "com.example.dropofhope2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "549747639946-tm44jiro74fsk26uceufrip5ivo75gk8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dropofhope2",
+            "certificate_hash": "dcd1eafbf58b4e4de16c470b8d171ae867184966"
+          }
+        },
+        {
+          "client_id": "549747639946-f5nubs1boagc7mpmhruv0emdbggvmn0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHENvvyDIXNGVyjATmWx47c3I8iLE5lJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "549747639946-f5nubs1boagc7mpmhruv0emdbggvmn0a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
