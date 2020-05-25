@@ -21,18 +21,25 @@ In this sample application you can :
 - Admins can also see the reports and feedbacks sent by the users.
 ## Tools
 ### Frontend
-- Android Studio 3.6.3 (*latest*)
+- Android Studio 3.6.3 (*latest version - Feb 2020*)
 - Languages used:
     - Java
     - XML
 > Android Studio is the official integrated development environment for Google's Android operating system, built on JetBrains' IntelliJ IDEA software and designed specifically for Android development.
 ### Backend
 - Firebase Realtime Database *by Google*
+   - This database is maintained and secured by the google.
+   - This database contains all the registered users information.
+   - It also contains all the information related to reportings and feedbacks.
 - Firebase Storage
+   - A type of cloud storage.
+   - Cloud Storage for Firebase lets you upload and share user generated content, such as images and video, which allows you to build rich media content into your apps. Your data is stored in a Google Cloud Storage bucket, an exabyte scale object storage solution with high availability and global redundancy. Cloud Storage lets you securely upload these files directly from mobile devices and web browsers, handling spotty networks with ease.
+   - The Firebase Storage is used to store files such as image file(in my case).
 - Firebase Authentication
+   - Firebase Authentication provides backend services, easy-to-use SDKs, and ready-made UI libraries to authenticate users to your app. It supports authentication using passwords, phone numbers, popular federated identity providers like Google, Facebook and Twitter, and more.
 - Languages used:
     - Java
-> **Firebase** is the one kind of **NoSQL** databases The **Firebase** database is just a big JSON object where you can store whatever you want inside. Unlike SQL there's no schema for the database, no tables, no columns, it's just a combination of key/value pairs.
+> **Firebase** is one kind of **NoSQL** databases The **Firebase** database is just a big JSON object where you can store whatever you want inside. Unlike SQL there's no schema for the database, no tables, no columns, it's just a combination of key/value pairs.
 ## Advisory notes:
 > - This app is a sample application, not for deployment purposes.
 > - The application's **minimum API Level** is set to **24 (Android 7.0)**.
