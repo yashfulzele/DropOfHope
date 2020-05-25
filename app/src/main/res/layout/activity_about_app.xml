@@ -38,7 +38,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,14 +47,47 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/mild_rounded_corners"
-                android:backgroundTint="#20FFFFFF"
+                android:backgroundTint="#30FFFFFF"
                 android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/left_quote"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleX="-1"
+                        android:src="@drawable/ic_quote_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/quote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="60dp"
+                        android:layout_toEndOf="@id/left_quote"
+                        android:fontFamily="casual"
+                        android:text="Donate blood for a reason, let the reason to be life!"
+                        android:textColor="#E7E7E7"
+                        android:textSize="27dp" />
+
+                    <ImageView
+                        android:id="@+id/right_quote"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="110dp"
+                        android:scaleY="-1"
+                        android:src="@drawable/ic_quote_black_24dp" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/frank_ruhl_libre_light"
+                    android:fontFamily="serif-monospace"
                     android:text="Information...."
                     android:textColor="@color/hint"
                     android:textSize="20sp" />

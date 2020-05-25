@@ -27,7 +27,7 @@ public class AdminAuthActivity extends AppCompatActivity {
             String username, password;
             username = adminUsernameEt.getText().toString();
             password = adminPasswordEt.getText().toString();
-            if(isValid(username, password)){
+            if (isValid(username, password)) {
                 showProgressBar();
                 startActivity(new Intent(getApplicationContext(), AdminMainActivity.class));
                 AdminAuthActivity.this.finish();
@@ -42,20 +42,15 @@ public class AdminAuthActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar_admin);
     }
 
-    private boolean isValid(String username, String password){
-        if(username.equals("admin_yash")){
+    private boolean isValid(String username, String password) {
+        if (username.equals("yashfulzele")) {
             adminUsernameEt.setError("Username is wrong!");
             return false;
-        }
-        else if(password.equals("password003")){
+        } else if (password.equals("password003")) {
             adminPasswordEt.setError("Password is wrong!");
             return false;
         }
         return true;
-    }
-
-    private void showMessage(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     private void showProgressBar() {
