@@ -37,3 +37,4 @@ In this sample application you can :
 > - This app is a sample application, not for deployment purposes.
 > - The application's **minimum API Level** is set to **24 (Android 7.0)**.
 > - The target **API Level** is **29 (Android Q)**.
+> - **The branch "*new_map*" contains the latest changes and it is the default branch.**
