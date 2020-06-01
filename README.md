@@ -1,4 +1,7 @@
 # Drop of Hope
+!["I love open source"](https://img.shields.io/badge/OpenSource-%E2%9D%A4-blueviolet)
+[![GitHub issues](https://img.shields.io/github/issues/yashfulzele/DropOfHope?style=social)](https://github.com/yashfulzele/DropOfHope/issues)
+
 !["Drop of Hope" icon](https://github.com/yashfulzele/DropOfHope2/blob/new_map/drop_of_hope/app_icon.png)
 This is the repository for an android app. Name of the app is *Drop of Hope*. This application allows the probable recipients to search and match the volunteer donors or searching for blood donation camps and also hospitals, and make a request for the blood.
 ## Installation
